@@ -16,8 +16,8 @@ import {
   Borrow,
   Profile,
 } from "../pages";
-import DefaultLayout from "../components/layout/DefaultLayout";
-import UserLayout from "../components/layout/UserLayout";
+import DefaultLayout from "@components/layout/DefaultLayout";
+import UserLayout from "@components/layout/UserLayout";
 
 const AppRoutes = () => {
   return (

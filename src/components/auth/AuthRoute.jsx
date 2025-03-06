@@ -1,7 +1,10 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
-const AuthRoute = () => {
-  return <div>Auth Route</div>;
+const AuthRoute = ({ children }) => {
+  const isAuth = false;
+
+  return isAuth ? children : <Navigate to="/" />;
 };
 
 export default AuthRoute;
