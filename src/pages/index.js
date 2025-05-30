@@ -12,3 +12,4 @@ export { default as UserPage } from "./users/UserPage";
 export { default as Books } from "./books/Books";
 export { default as Profile } from "./users/Profile";
 export { default as BorrowPage } from "./borrow/BorrowPage";
+export { default as ActivateUser } from "./auth/ActivateUser";

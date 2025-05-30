@@ -1,17 +1,30 @@
 import axios from "axios";
-
-export const apiProcess = async ({ url, method, payload }) => {
+import { toast } from "react-toastify";
+export const apiProcess = async ({ url, method, payload, showToast }) => {
   try {
-    const response = await axios({
+    const responsePending = axios({
       url,
       method,
       data: payload,
-      //   headers,
+      // headers: {
+      //   "Content-Type": "application/json", // ⚠️ Explicitly set headers
+      // },
     });
-    console.log(response);
-    return response;
+    // show toast message
+    if (showToast) {
+      toast.promise(responsePending, {
+        pending: "Please wait ...",
+      });
+    }
+    const { data } = await responsePending;
+    showToast && toast[data.status](data.message);
+    return data;
   } catch (error) {
-    console.log(error);
-    return error.response.data;
+    const msg = error?.response?.data?.message || error.message;
+    showToast && toast.error(msg);
+    return {
+      status: "error",
+      message: msg,
+    };
   }
 };
