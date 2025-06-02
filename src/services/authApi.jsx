@@ -26,3 +26,13 @@ export const activateNewUserApi = async (payload) => {
 
   return apiProcess(obj);
 };
+
+export const signInUserAPI = async (payload) => {
+  const obj = {
+    url: authApiEP + "/login",
+    method: "post",
+    payload,
+    showToast: true,
+  };
+  return apiProcess(obj);
+};

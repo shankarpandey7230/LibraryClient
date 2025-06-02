@@ -1,14 +1,26 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-export const apiProcess = async ({ url, method, payload, showToast }) => {
+
+const getAccessJWT = () => {
+  return sessionStorage.getItem("accessJWT");
+};
+export const apiProcess = async ({
+  url,
+  method,
+  payload,
+  showToast,
+  isPrivateCall,
+}) => {
   try {
+    const headers = {};
+    if (isPrivateCall) {
+      headers.authorization = "bearer " + getAccessJWT();
+    }
     const responsePending = axios({
       url,
       method,
       data: payload,
-      // headers: {
-      //   "Content-Type": "application/json", // ⚠️ Explicitly set headers
-      // },
+      headers,
     });
     // show toast message
     if (showToast) {

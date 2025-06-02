@@ -26,7 +26,7 @@ const ActivateUser = () => {
     }
     if (response.status === "success") {
       setTimeout(() => {
-        navigate("/signin");
+        navigate("/login");
       }, 3000);
     }
   }, [sessionId, t, navigate, response.status]);
