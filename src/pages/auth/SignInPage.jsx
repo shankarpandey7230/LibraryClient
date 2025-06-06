@@ -1,24 +1,38 @@
-import { Card, Form, Button } from "react-bootstrap";
-import CustomInput from "../../components/customInput/CustomInput";
+import { Card, Form, Button, Spinner } from "react-bootstrap";
+import CustomInput from "@components/customInput/CustomInput";
 import useForm from "../../hooks/useForm";
-import { signInUserAPI } from "../../services/authApi";
+import { signInUserAPI } from "@services/authApi";
 
-import { fetchUserAction } from "../../features/user/userAction";
+import { autoLoginUser, fetchUserAction } from "../../features/user/userAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 
-const initialState = {};
+const initialState = {
+  email: "ba1a23@gmail.com",
+  password: "Asdf!23456",
+};
 
 const SignInPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { form, handleOnChange } = useForm(initialState);
   const { user } = useSelector((state) => state.userInfo);
+  const loaderRef = useRef(true);
 
   useEffect(() => {
-    user?._id && navigate("/user");
-  }, [user?._id, navigate]);
+    user?._id ? navigate("/user") : dispatch(autoLoginUser());
+    if (
+      sessionStorage.getItem("accessJWT") ||
+      localStorage.getItem("refreshJWT")
+    ) {
+      setTimeout(() => {
+        loaderRef.current = false;
+      }, 2000);
+    } else {
+      loaderRef.current = false;
+    }
+  }, [user?._id, navigate, dispatch]);
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     if (form.email && form.password) {
@@ -37,6 +51,14 @@ const SignInPage = () => {
       alert("Please fill all the inputs");
     }
   };
+  if (loaderRef.current) {
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
+
   return (
     <div className="signin-page d-flex justify-content-center align-items-center">
       <Card style={{ width: "18rem" }}>

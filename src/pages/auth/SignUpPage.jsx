@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import CustomInput from "../../components/customInput/CustomInput";
+import CustomInput from "@components/customInput/CustomInput";
 import { signUpInput } from "../../assets/customInput/userSignupInput";
 import useForm from "../../hooks/useForm";
-import { signUpNewUserApi } from "../../services/authApi";
+import { signUpNewUserApi } from "@services/authApi";
 
 const initialState = {
   firstName: "",

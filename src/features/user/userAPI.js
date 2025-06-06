@@ -1,4 +1,4 @@
-import { apiProcess } from "../../services/apiCall";
+import { apiProcess } from "@services/apiCall";
 
 const apiBaseUrl = "http://localhost:8000";
 

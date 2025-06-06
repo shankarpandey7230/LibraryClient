@@ -31,6 +31,7 @@ const AppRoutes = () => {
       </Route>
       <Route path="/user" element={<UserLayout />}>
         <Route index element={<Dashboard />} />
+
         <Route path="books" element={<Books />} />
         <Route path="new-book" element={<NewBookPage />} />
         <Route path="edit-book" element={<EditBookPage />} />

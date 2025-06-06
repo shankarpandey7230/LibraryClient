@@ -3,14 +3,30 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Logo from "../../assets/Logo.png";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import { TbLogin } from "react-icons/tb";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOutAPI } from "@services/authApi";
+import { setUser } from "../../features/user/userSlice";
 const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleOnLogOut = () => {
+    logOutAPI();
+    //Logout from frontend
+    sessionStorage.removeItem("accessJWT");
+    localStorage.removeItem("refreshJWT");
+
+    dispatch(setUser({}));
+    setTimeout(() => {
+      navigate("/");
+    }, 100);
+  };
   return (
     <Navbar expand="md" className="bg-dark" variant="dark">
       <Container>
@@ -35,10 +51,14 @@ const Header = () => {
                   <MdDashboard />
                   Dashboard
                 </Link>
-                <Link className="nav-link" to="/">
+                <Nav.Link
+                  as="span"
+                  onClick={handleOnLogOut}
+                  style={{ cursor: "pointer" }}
+                >
                   <FaSignOutAlt />
                   Sign Out
-                </Link>
+                </Nav.Link>
               </>
             ) : (
               <>
