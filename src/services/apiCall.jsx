@@ -20,7 +20,8 @@ export const apiProcess = async ({
     const headers = {};
     if (isPrivateCall) {
       const token = isRefreshJWT ? getRefreshJWT() : getAccessJWT();
-      headers.authorization = "bearer " + token;
+      // headers.authorization = "bearer " + token;
+      headers["Authorization"] = "Bearer " + token;
     }
     const responsePending = axios({
       url,
@@ -41,7 +42,7 @@ export const apiProcess = async ({
     const msg = error?.response?.data?.message || error.message;
     showToast && toast.error(msg);
     // console.log(msg);
-    if (error.status === 401 && msg === "jwt expired") {
+    if (error?.response?.status === 401 && msg === "jwt expired") {
       // call api to get new accessJWT
       const { payload } = await fetchNewAccessJWTAPI();
       if (payload) {
