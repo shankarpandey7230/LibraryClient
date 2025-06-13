@@ -18,6 +18,7 @@ const SignInPage = () => {
   const dispatch = useDispatch();
   const { form, handleOnChange } = useForm(initialState);
   const { user } = useSelector((state) => state.userInfo);
+  console.log(user);
   const loaderRef = useRef(true);
 
   useEffect(() => {
@@ -35,12 +36,16 @@ const SignInPage = () => {
   }, [user?._id, navigate, dispatch]);
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+
     if (form.email && form.password) {
       const { payload } = await signInUserAPI(form);
-      // console.log(form);
+      // console.log(payload, "login API response");
+      // // console.log(form);
       if (payload?.accessJWT) {
         sessionStorage.setItem("accessJWT", payload.accessJWT);
         localStorage.setItem("refreshJWT", payload.refreshJWT);
+        console.log("accessJWT:", sessionStorage.getItem("accessJWT"));
+        console.log("refreshJWT:", localStorage.getItem("refreshJWT"));
 
         // call api to get the user
         dispatch(fetchUserAction());
