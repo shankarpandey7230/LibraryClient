@@ -39,8 +39,8 @@ const SignInPage = () => {
 
     if (form.email && form.password) {
       const { payload } = await signInUserAPI(form);
-      console.log(payload, "login API response");
-      // console.log(form);
+      // console.log(payload, "login API response");
+      // // console.log(form);
       if (payload?.accessJWT) {
         sessionStorage.setItem("accessJWT", payload.accessJWT);
         localStorage.setItem("refreshJWT", payload.refreshJWT);

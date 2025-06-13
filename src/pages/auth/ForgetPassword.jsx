@@ -3,6 +3,7 @@ import { Alert, Card, Form } from "react-bootstrap";
 import CustomInput from "@/components/customInput/CustomInput";
 import Button from "react-bootstrap/Button";
 import useForm from "../../hooks/useForm";
+import { requestPasswordResetOTP } from "../../services/authApi";
 
 const initialState = {};
 
@@ -10,17 +11,24 @@ const ForgetPassword = () => {
   const emailRef = useRef("");
   const [showResetForm, setShowResetForm] = useState(false);
   const { form, passwordErrors, handleOnChange } = useForm(initialState);
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
 
+    //call the api to reset the form
+    const response = await requestPasswordResetOTP({ email });
+    // console.log(response);
+    // console.log(email);
+    if (response?.status == "success") {
+      setShowResetForm(true);
+    }
     emailRef.current.value = "";
   };
-  console.log(form);
-  const handlePasswordResetSubmit = (e) => {
+
+  const handlePasswordResetSubmit = async (e) => {
     e.preventDefault();
-    // console.log(form);
   };
+
   return (
     <div className="signin-page d-flex justify-content-center align-items-center">
       <Card style={{ width: "22rem" }}>
@@ -48,7 +56,10 @@ const ForgetPassword = () => {
               <hr />
               {/* form when OTP is requested */}
               <div>
-                <Alert variant="success">message</Alert>
+                <Alert variant="success">
+                  We have sent you an otp to reset your password. Please follow
+                  accordingly...
+                </Alert>
                 <Form onSubmit={handlePasswordResetSubmit}>
                   <CustomInput
                     label="OTP"
@@ -92,7 +103,7 @@ const ForgetPassword = () => {
           )}
 
           <div className="text-center my-3">
-            Ready to Login <a href="/forget-password">Login Now</a>
+            Ready to Login <a href="/login">Login Now</a>
           </div>
         </Card.Body>
       </Card>
