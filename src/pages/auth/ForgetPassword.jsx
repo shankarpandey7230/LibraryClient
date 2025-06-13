@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Alert, Card, Form } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
+import { Alert, Card, Form, Spinner } from "react-bootstrap";
 import CustomInput from "@/components/customInput/CustomInput";
 import Button from "react-bootstrap/Button";
 import useForm from "../../hooks/useForm";
@@ -8,20 +8,42 @@ import { requestPasswordResetOTP } from "../../services/authApi";
 const initialState = {};
 
 const ForgetPassword = () => {
+  const timeToRequestOTPAgain = 5;
   const emailRef = useRef("");
   const [showResetForm, setShowResetForm] = useState(false);
+  const [isOTPPending, setIsOTPPending] = useState(false);
+  const [isOTPBtnDisabled, setIsOTPBtnDisabled] = useState(false);
+  const [counter, setCounter] = useState(0);
   const { form, passwordErrors, handleOnChange } = useForm(initialState);
+
+  useEffect(() => {
+    if (counter > 0) {
+      const timer = setInterval(() => {
+        setCounter(() => counter - 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    } else {
+      setIsOTPBtnDisabled(false);
+    }
+  }, [counter]);
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
 
     //call the api to reset the form
+    setIsOTPPending(true);
+    setIsOTPBtnDisabled(true);
     const response = await requestPasswordResetOTP({ email });
     // console.log(response);
     // console.log(email);
     if (response?.status == "success") {
       setShowResetForm(true);
     }
+    setIsOTPPending(false);
+    // setIsOTPBtnDisabled(false);
+    setCounter(timeToRequestOTPAgain);
+
     emailRef.current.value = "";
   };
 
@@ -48,7 +70,15 @@ const ForgetPassword = () => {
             />
 
             <div className="d-grid">
-              <Button type="submit">Request OTP</Button>
+              <Button type="submit" disabled={isOTPBtnDisabled}>
+                {isOTPPending ? (
+                  <Spinner variant="border" />
+                ) : counter > 0 ? (
+                  ` Request OTP ${counter}`
+                ) : (
+                  "Request OTP"
+                )}
+              </Button>
             </div>
           </Form>
           {showResetForm && (
@@ -57,7 +87,7 @@ const ForgetPassword = () => {
               {/* form when OTP is requested */}
               <div>
                 <Alert variant="success">
-                  We have sent you an otp to reset your password. Please follow
+                  We will sent you an otp to reset your password. Please follow
                   accordingly...
                 </Alert>
                 <Form onSubmit={handlePasswordResetSubmit}>
