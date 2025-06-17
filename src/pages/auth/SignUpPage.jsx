@@ -7,8 +7,8 @@ import useForm from "../../hooks/useForm";
 import { signUpNewUserApi } from "@services/authApi";
 
 const initialState = {
-  firstName: "",
-  lastName: "",
+  fName: "",
+  lName: "",
   email: "",
   password: "",
   confirmPassword: "",

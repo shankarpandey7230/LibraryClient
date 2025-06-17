@@ -3,11 +3,13 @@ import { Alert, Card, Form, Spinner } from "react-bootstrap";
 import CustomInput from "@/components/customInput/CustomInput";
 import Button from "react-bootstrap/Button";
 import useForm from "../../hooks/useForm";
-import { requestPasswordResetOTP } from "../../services/authApi";
+import { requestPasswordResetOTP, resetPassAPI } from "../../services/authApi";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {};
 
 const ForgetPassword = () => {
+  const navigate = useNavigate();
   const timeToRequestOTPAgain = 5;
   const emailRef = useRef("");
   const [showResetForm, setShowResetForm] = useState(false);
@@ -44,11 +46,24 @@ const ForgetPassword = () => {
     // setIsOTPBtnDisabled(false);
     setCounter(timeToRequestOTPAgain);
 
-    emailRef.current.value = "";
+    // emailRef.current.value = "";
   };
 
   const handlePasswordResetSubmit = async (e) => {
     e.preventDefault();
+    const email = emailRef.current.value;
+    console.log(email, form);
+    const payload = {
+      email,
+      otp: form.otp,
+      password: form.password,
+      confirmPassword: form.confirmPassword,
+    };
+    const response = await resetPassAPI(payload);
+    // console.log(response);
+    if (response?.status === "success") {
+      setTimeout(() => navigate("/login"), 3000);
+    }
   };
 
   return (
@@ -100,7 +115,7 @@ const ForgetPassword = () => {
                     onChange={handleOnChange}
                   />
                   <CustomInput
-                    label="Password"
+                    label="New Password"
                     name="password"
                     type="password"
                     required
@@ -140,5 +155,4 @@ const ForgetPassword = () => {
     </div>
   );
 };
-
 export default ForgetPassword;
