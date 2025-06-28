@@ -22,6 +22,8 @@ export const apiProcess = async ({
       const token = isRefreshJWT ? getRefreshJWT() : getAccessJWT();
       // headers.authorization = "bearer " + token;
       headers["Authorization"] = "Bearer " + token;
+      if (!token)
+        return alert("Please sign out and log in again to make this request ");
     }
     const responsePending = axios({
       url,
@@ -42,25 +44,26 @@ export const apiProcess = async ({
     const msg = error?.response?.data?.message || error.message;
     showToast && toast.error(msg);
     // console.log(msg);
-    if (error?.response?.status === 401 && msg === "jwt expired") {
-      // call api to get new accessJWT
-      const { payload } = await fetchNewAccessJWTAPI();
-      if (payload) {
-        sessionStorage.setItem("accessJWT", payload);
-        return apiProcess({
-          url,
-          method,
-          payload,
-          showToast,
-          isPrivateCall,
-          isRefreshJWT,
-        });
+    if (error?.response?.status === 401) {
+      if (msg === "jwt expired") {
+        // call api to get new accessJWT
+        const { payload } = await fetchNewAccessJWTAPI();
+        if (payload) {
+          sessionStorage.setItem("accessJWT", payload);
+          return apiProcess({
+            url,
+            method,
+            payload,
+            showToast,
+            isPrivateCall,
+            isRefreshJWT,
+          });
+        }
+      } else {
+        sessionStorage.removeItem("accessJWT");
+        localStorage.removeItem("refreshJWT");
       }
-    } else {
-      sessionStorage.removeItem("accessJWT");
-      localStorage.removeItem("refreshJWT");
     }
-
     return {
       status: "error",
       message: msg,
