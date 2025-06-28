@@ -12,23 +12,21 @@ const UserLayout = () => {
       {/* navbar */}
       <Header />
       {/* body of the page */}
-      <Container fluid>
-        <Row>
-          <Col md={3} xl={2} className="bg-secondary text-white">
-            <div className="p-3">
-              <div className="">Welcome Back</div>
-              <h4>Shankar</h4>
-            </div>
-            <hr />
-            <Sidebar />
-          </Col>
-          <Col md={9} xl={10}>
-            <main className="main">
-              <Outlet />
-            </main>
-          </Col>
-        </Row>
-      </Container>
+
+      <div className="d-flex">
+        <div className="bg-secondary text-white p-3" style={{ width: "200px" }}>
+          <div className="p-3">
+            <div className="">Welcome Back</div>
+            <h4>Shankar</h4>
+          </div>
+          <hr />
+          <Sidebar />
+        </div>
+
+        <main className="main">
+          <Outlet />
+        </main>
+      </div>
 
       {/* footer */}
       <Footer />

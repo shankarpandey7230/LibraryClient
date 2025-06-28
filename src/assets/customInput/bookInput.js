@@ -1,0 +1,52 @@
+export const bookInput = [
+  {
+    label: "Title*",
+    name: "title",
+    type: "text",
+    required: true,
+    placeholder: "Books to Read",
+  },
+  {
+    label: "Year",
+    name: "year",
+    type: "Number",
+    min: "1901",
+    max: new Date().getFullYear(),
+    required: true,
+    placeholder: "2025",
+  },
+  {
+    label: "Author*",
+    name: "author",
+    type: "text",
+    required: true,
+    placeholder: "Shankar",
+  },
+  {
+    label: "Imgage Url",
+    name: "imgUrl",
+    type: "url",
+    placeholder: "https://path-toimg-url",
+  },
+  {
+    label: "ISBN",
+    name: "isbn",
+    type: "number",
+    required: true,
+    placeholder: "1244145213512",
+  },
+  {
+    label: "Genre",
+    name: "genre",
+    type: "text",
+    required: true,
+    placeholder: "Education",
+  },
+  {
+    label: "Description",
+    name: "description",
+    as: "textarea",
+    required: true,
+    placeholder: "Book Summary ",
+  },
+];

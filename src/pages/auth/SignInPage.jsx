@@ -19,8 +19,8 @@ const SignInPage = () => {
   const dispatch = useDispatch();
   const { form, handleOnChange } = useForm(initialState);
   const location = useLocation();
-  console.log(location);
-  const path = location?.state?.from ?? "user";
+  // console.log(location);
+  const path = location?.state?.from ?? "/user";
   const { user } = useSelector((state) => state.userInfo);
   // console.log(user);
   const loaderRef = useRef(true);
@@ -48,8 +48,8 @@ const SignInPage = () => {
       if (payload?.accessJWT) {
         sessionStorage.setItem("accessJWT", payload.accessJWT);
         localStorage.setItem("refreshJWT", payload.refreshJWT);
-        console.log("accessJWT:", sessionStorage.getItem("accessJWT"));
-        console.log("refreshJWT:", localStorage.getItem("refreshJWT"));
+        // console.log("accessJWT:", sessionStorage.getItem("accessJWT"));
+        // console.log("refreshJWT:", localStorage.getItem("refreshJWT"));
 
         // call api to get the user
         dispatch(fetchUserAction());

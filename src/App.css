@@ -1,8 +1,10 @@
 .main{
   min-height: 85vh;
+  width: calc(100% - 200px);
 }
 .signin-page{
   min-height: 100vh;
   background: url(./assets/login-page-img.jpg) center no-repeat;
   background-size: cover;
+  min-width: 100vw;
 }
