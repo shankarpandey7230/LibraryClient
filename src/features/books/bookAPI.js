@@ -31,3 +31,15 @@ export const adminFetchAllBookAPI = async () => {
 
   return result;
 };
+
+export const updateBookAPI = async (payload) => {
+  const obj = {
+    url: bookApiEP,
+    method: "put",
+    showToast: true,
+    isPrivateCall: true,
+    payload,
+  };
+  const result = await apiProcess(obj);
+  return result;
+};
