@@ -43,26 +43,39 @@ const BookTable = () => {
           </tr>
         </thead>
         <tbody>
-          {displayBook.map(({ _id, status, title, imageUrl }, i) => (
-            <tr key={_id}>
-              <td>{i + 1}</td>
-              <td>
-                <img src={imageUrl} alt="" />
-              </td>
-              <td>{title}</td>
-              <td
-                className={status === "active" ? "text-success" : "text-danger"}
-              >
-                {status}
-              </td>
-              <td>Is available; if not when</td>
-              <td>
-                <Link to="/user/edit-book">
-                  <Button variant="warning">Edit</Button>
-                </Link>
-              </td>
-            </tr>
-          ))}
+          {displayBook.map(
+            (
+              { _id, status, title, imageUrl, expectedAvailable, available },
+              i
+            ) => (
+              <tr key={_id}>
+                <td>{i + 1}</td>
+                <td>
+                  <img src={imageUrl} alt="" />
+                </td>
+                <td>{title}</td>
+                <td
+                  className={
+                    status === "active" ? "text-success" : "text-danger"
+                  }
+                >
+                  {status}
+                </td>
+                <td>
+                  {available
+                    ? "YES"
+                    : !available && expectedAvailable
+                    ? expectedAvailable.slice(0, 10)
+                    : "N/A"}
+                </td>
+                <td>
+                  <Link to={"/user/edit-book/" + _id}>
+                    <Button variant="warning">Edit</Button>
+                  </Link>
+                </td>
+              </tr>
+            )
+          )}
         </tbody>
       </Table>
     </div>
