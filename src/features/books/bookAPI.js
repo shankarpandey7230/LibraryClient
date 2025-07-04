@@ -43,3 +43,14 @@ export const updateBookAPI = async (payload) => {
   const result = await apiProcess(obj);
   return result;
 };
+
+export const deleteBookAPI = async (_id) => {
+  const obj = {
+    url: bookApiEP + "/" + _id,
+    method: "delete",
+    showToast: true,
+    isPrivateCall: true,
+  };
+  const result = await apiProcess(obj);
+  return result;
+};
