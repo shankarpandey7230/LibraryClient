@@ -45,15 +45,32 @@ const BookTable = () => {
         <tbody>
           {displayBook.map(
             (
-              { _id, status, title, imageUrl, expectedAvailable, available },
+              { _id, status, title, imgUrl, expectedAvailable, available },
               i
             ) => (
               <tr key={_id}>
                 <td>{i + 1}</td>
                 <td>
-                  <img src={imageUrl} alt="" />
+                  <img
+                    src={import.meta.env.VITE_BASE_API_URL + imgUrl.slice(6)}
+                    alt="Book"
+                    style={{
+                      width: "60px",
+                      height: "80px",
+                      objectFit: "cover",
+                    }}
+                  />
                 </td>
-                <td>{title}</td>
+
+                <td
+                  style={{
+                    maxWidth: "200px",
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                  }}
+                >
+                  {title}
+                </td>
                 <td
                   className={
                     status === "active" ? "text-success" : "text-danger"

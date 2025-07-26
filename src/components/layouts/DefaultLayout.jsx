@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 
 const DefaultLayout = () => {
   return (
-    <div>
+    <div className="flex-grow-1 w-100">
       {/* navbar */}
       <Header />
       {/* body of the page */}

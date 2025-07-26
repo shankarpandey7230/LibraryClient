@@ -18,6 +18,7 @@ export const apiProcess = async ({
 }) => {
   try {
     const headers = {};
+
     if (isPrivateCall) {
       const token = isRefreshJWT ? getRefreshJWT() : getAccessJWT();
       // headers.authorization = "bearer " + token;
