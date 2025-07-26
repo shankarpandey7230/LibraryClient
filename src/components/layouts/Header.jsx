@@ -28,7 +28,7 @@ const Header = () => {
     }, 100);
   };
   return (
-    <Navbar expand="md" className="bg-dark" variant="dark">
+    <Navbar expand="md" className="bg-dark text-white w-100 nav" variant="dark">
       <Container>
         <Link to="/">
           <img

@@ -22,12 +22,12 @@ export const bookInput = [
     required: true,
     placeholder: "Shankar",
   },
-  {
-    label: "Imgage Url",
-    name: "imgUrl",
-    type: "url",
-    placeholder: "https://path-toimg-url",
-  },
+  // {
+  //   label: "Imgage Url",
+  //   name: "imgUrl",
+  //   type: "url",
+  //   placeholder: "https://path-toimg-url",
+  // },
   {
     label: "ISBN",
     name: "isbn",
@@ -76,7 +76,7 @@ export const editBookInput = [
     label: "Expected Available Date",
     name: "expectedAvailable",
     type: "date",
-    required: true,
+    // required: true,
   },
   {
     label: "Author*",
@@ -84,11 +84,11 @@ export const editBookInput = [
     type: "text",
     required: true,
   },
-  {
-    label: "Imgage Url",
-    name: "imgUrl",
-    type: "url",
-  },
+  // {
+  //   label: "Imgage Url",
+  //   name: "imgUrl",
+  //   type: "url",
+  // },
   {
     label: "ISBN",
     name: "isbn",

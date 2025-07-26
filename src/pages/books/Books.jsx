@@ -13,7 +13,7 @@ const Books = () => {
     dispatch(adminFetchBookAction());
   }, [dispatch]);
   return (
-    <div className="p-3">
+    <div className="p-3 w-100" style={{ maxWidth: "100vw" }}>
       <h3>Books</h3>
       <hr />
       <div className="d-flex justify-content-end mb-3">
