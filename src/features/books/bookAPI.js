@@ -54,3 +54,15 @@ export const deleteBookAPI = async (_id) => {
   const result = await apiProcess(obj);
   return result;
 };
+
+// fetch all publicBook API
+export const fetchAllPublicBookAPI = async () => {
+  const obj = {
+    url: bookApiEP,
+    method: "get",
+  };
+
+  const result = await apiProcess(obj);
+
+  return result;
+};

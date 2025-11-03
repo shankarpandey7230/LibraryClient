@@ -53,6 +53,7 @@ const BookTable = () => {
                 <td>
                   <img
                     src={import.meta.env.VITE_BASE_API_URL + imgUrl.slice(6)}
+                    // src={imgUrl}
                     alt="Book"
                     style={{
                       width: "60px",
@@ -60,6 +61,20 @@ const BookTable = () => {
                       objectFit: "cover",
                     }}
                   />
+                  {/* <img
+                    src={
+                      imgUrl.startsWith("http")
+                        ? imgUrl
+                        : import.meta.env.VITE_BASE_API_URL +
+                          imgUrl.replace(/^public[\\/]/, "")
+                    }
+                    alt="Book"
+                    style={{
+                      width: "60px",
+                      height: "80px",
+                      objectFit: "cover",
+                    }}
+                  /> */}
                 </td>
 
                 <td

@@ -56,7 +56,7 @@ const EditBookForm = () => {
       available,
       isbn,
       __v,
-
+      averageRating,
       ...rest
     } = form;
     // console.log(rest);
@@ -85,7 +85,6 @@ const EditBookForm = () => {
 
   // console.log(imgToDelete);
   // console.log(form);
-
   return (
     <div className="p-4">
       <h3>Update your Book Details </h3>
@@ -127,9 +126,16 @@ const EditBookForm = () => {
                 value={img}
                 onChange={handleOnImageToDelete}
               />
+
               <img
                 src={import.meta.env.VITE_BASE_API_URL + img.slice(6)}
-                width="200px"
+                alt="Book"
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                }}
                 className="img-thumbnail"
               />
             </div>

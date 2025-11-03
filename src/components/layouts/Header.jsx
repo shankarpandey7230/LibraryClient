@@ -11,6 +11,8 @@ import { TbLogin } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutAPI } from "@services/authApi";
 import { setUser } from "../../features/user/userSlice";
+import { Form, InputGroup } from "react-bootstrap";
+import { CiSearch } from "react-icons/ci";
 const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
@@ -38,41 +40,57 @@ const Header = () => {
             className="d-inline-block align-top rounded"
           />
         </Link>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Link className="nav-link" to="/">
-              <FaHome />
-              Home
-            </Link>
-            {user?._id ? (
-              <>
-                <Link className="nav-link" to="/user">
-                  <MdDashboard />
-                  Dashboard
-                </Link>
-                <Nav.Link
-                  as="span"
-                  onClick={handleOnLogOut}
-                  style={{ cursor: "pointer" }}
-                >
-                  <FaSignOutAlt />
-                  Sign Out
-                </Nav.Link>
-              </>
-            ) : (
-              <>
-                <Link className="nav-link" to="/signup">
-                  <FaSignInAlt />
-                  SignUp
-                </Link>
-                <Link className="nav-link" to="/login">
-                  <TbLogin />
-                  SignIn
-                </Link>
-              </>
-            )}
-          </Nav>
+          <div className="d-flex w-100 justify-content-between flex-column flex-md-row">
+            <div></div>
+            <Form className="my-2 my-md-0 w-50 w-md-40">
+              <InputGroup className="">
+                <Form.Control
+                  placeholder="Search your book"
+                  aria-label="Search your book"
+                  aria-describedby="basic-addon2"
+                />
+                <InputGroup.Text id="basic-addon2">
+                  <CiSearch />
+                </InputGroup.Text>
+              </InputGroup>
+            </Form>
+            <Nav className="">
+              <Link className="nav-link" to="/">
+                <FaHome />
+                Home
+              </Link>
+              {user?._id ? (
+                <>
+                  <Link className="nav-link" to="/user">
+                    <MdDashboard />
+                    Dashboard
+                  </Link>
+                  <Nav.Link
+                    as="span"
+                    onClick={handleOnLogOut}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <FaSignOutAlt />
+                    Sign Out
+                  </Nav.Link>
+                </>
+              ) : (
+                <>
+                  <Link className="nav-link" to="/signup">
+                    <FaSignInAlt />
+                    SignUp
+                  </Link>
+                  <Link className="nav-link" to="/login">
+                    <TbLogin />
+                    SignIn
+                  </Link>
+                </>
+              )}
+            </Nav>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
