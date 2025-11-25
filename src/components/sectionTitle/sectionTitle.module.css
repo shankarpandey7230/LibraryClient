@@ -1,0 +1,16 @@
+.titleContainer{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+}
+.title{
+    text-transform: capitalize;
+}
+.line{
+    background-color: black;
+    flex-grow: 1;
+    height: 2px;
+    box-shadow: 0 4px 10px;
+    margin: 3rem 2rem 3rem 0;
+}
