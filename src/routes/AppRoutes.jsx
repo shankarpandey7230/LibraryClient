@@ -24,11 +24,15 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="books/:slug" element={<BookLandingPage />} />
         <Route path="signup" element={<SignUpPage />} />
         <Route path="activate-user" element={<ActivateUser />} />
         <Route path="login" element={<SignInPage />} />
         <Route path="forget-password" element={<ForgetPassword />} />
+        <Route path="*" element={<h1>404 Page Not Found</h1>} />
       </Route>
+
+      {/* private Pages */}
       <Route path="/user" element={<UserLayout />}>
         <Route index element={<Dashboard />} />
 

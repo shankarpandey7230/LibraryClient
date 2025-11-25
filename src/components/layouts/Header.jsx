@@ -30,14 +30,14 @@ const Header = () => {
     }, 100);
   };
   return (
-    <Navbar expand="md" className="bg-dark text-white w-100 nav" variant="dark">
-      <Container>
-        <Link to="/">
+    <Navbar expand="md" className="bg-dark text-white w-100" variant="dark">
+      <Container className="p-2 mx-5">
+        <Link to="/" className="d-flex align-items-center">
           <img
             src={Logo}
             alt="Logo"
             height="40"
-            className="d-inline-block align-top rounded"
+            className="d-inline-block align-top rounded "
           />
         </Link>
 

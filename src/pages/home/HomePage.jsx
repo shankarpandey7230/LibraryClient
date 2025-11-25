@@ -10,11 +10,11 @@ const HomePage = () => {
     <>
       {/* Hero Section */}
       <div className="w-100">
-        <CustomCarousel className="p-2" />
+        <CustomCarousel className="p-5" />
       </div>
 
       <Container className="mb-4">
-        <Row>
+        <Row className="">
           <Col>
             {/* Just Read */}
 

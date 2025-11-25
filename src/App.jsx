@@ -10,7 +10,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     // fetch all the book data and mount it in the redux
-    console.log("fetching public books");
+    // console.log("fetching public books");
     dispatch(fetchAllPublicBookAction());
   }, [dispatch]);
   return (
