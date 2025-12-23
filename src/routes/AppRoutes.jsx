@@ -18,12 +18,16 @@ import {
 } from "../pages";
 import DefaultLayout from "@components/layouts/DefaultLayout";
 import UserLayout from "@components/layouts/UserLayout";
+import AllBooks from "@pages/books/AllBooks";
+import Search from "@pages/books/Search";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="all-books" element={<AllBooks />} />
+        <Route path="search" element={<Search />} />
         <Route path="books/:slug" element={<BookLandingPage />} />
         <Route path="signup" element={<SignUpPage />} />
         <Route path="activate-user" element={<ActivateUser />} />
