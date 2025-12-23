@@ -11,11 +11,14 @@ import { TbLogin } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutAPI } from "@services/authApi";
 import { setUser } from "../../features/user/userSlice";
-import { Form, InputGroup } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import { CiSearch } from "react-icons/ci";
+import { ImBooks } from "react-icons/im";
+import { useState } from "react";
 const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
   const handleOnLogOut = () => {
@@ -28,6 +31,12 @@ const Header = () => {
     setTimeout(() => {
       navigate("/");
     }, 100);
+  };
+  const handleOnSearch = (e) => {
+    e.preventDefault();
+    if (!search.trim()) return;
+    navigate(`/search?query=${encodeURIComponent(search)}`);
+    setSearch("");
   };
   return (
     <Navbar expand="md" className="bg-dark text-white w-100" variant="dark">
@@ -45,22 +54,35 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <div className="d-flex w-100 justify-content-between flex-column flex-md-row">
             <div></div>
-            <Form className="my-2 my-md-0 w-50 w-md-40">
+            <Form
+              className="my-2 my-md-0 w-50 w-md-40"
+              onSubmit={handleOnSearch}
+            >
               <InputGroup className="">
                 <Form.Control
                   placeholder="Search your book"
                   aria-label="Search your book"
                   aria-describedby="basic-addon2"
+                  name="search"
+                  value={search}
+                  onChange={(e) => {
+                    // console.log("Input change:", e.target.value);
+                    setSearch(e.target.value);
+                  }}
                 />
-                <InputGroup.Text id="basic-addon2">
+                <Button variant="secondary" type="submit">
                   <CiSearch />
-                </InputGroup.Text>
+                </Button>
               </InputGroup>
             </Form>
             <Nav className="">
               <Link className="nav-link" to="/">
                 <FaHome />
                 Home
+              </Link>
+              <Link className="nav-link" to="/all-books">
+                <ImBooks />
+                Books
               </Link>
               {user?._id ? (
                 <>

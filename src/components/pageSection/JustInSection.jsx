@@ -1,11 +1,11 @@
 import SectionTitle from "@components/sectionTitle/SectionTitle";
 import React from "react";
-import CustomCard from "../customCard/CustomCard";
+import { CustomCard } from "../customCard/CustomCard";
 import { useSelector } from "react-redux";
 
 const JustInSection = () => {
   const { publicBooks } = useSelector((state) => state.bookInfo);
-  console.log(publicBooks);
+  // console.log(publicBooks);
   let books = [];
   if (publicBooks?.length) {
     const sorted = [...publicBooks].sort(
@@ -13,7 +13,7 @@ const JustInSection = () => {
     );
     books = sorted.slice(0, 4);
   }
-  console.log(books);
+  // console.log(books);
   return (
     <div className=" just-in-wrapper">
       <SectionTitle title="Just In" />

@@ -1,4 +1,4 @@
-import CustomCard from "@components/customCard/CustomCard";
+import { CustomCard } from "@components/customCard/CustomCard";
 import SectionTitle from "@components/sectionTitle/SectionTitle";
 import React from "react";
 
