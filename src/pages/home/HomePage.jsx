@@ -1,10 +1,8 @@
-import { CustomCarousel } from "@components/customCarousel/CustomCarousel";
-import { BestRead } from "@components/pageSection/BestRead";
-import { JustInSection } from "@components/pageSection/JustInSection";
-import { Recommendation } from "@components/pageSection/Recommendation";
-import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-
+import CustomCarousel from "@components/customCarousel/CustomCarousel";
+import BestRead from "@components/pageSection/BestRead";
+import JustInSection from "@components/pageSection/JustInSection";
+import Recommendation from "@components/pageSection/Recommendation";
 const HomePage = () => {
   return (
     <Container className="mb-4">
