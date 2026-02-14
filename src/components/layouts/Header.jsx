@@ -15,8 +15,10 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 import { CiSearch } from "react-icons/ci";
 import { ImBooks } from "react-icons/im";
 import { useState } from "react";
+import { BsCart3 } from "react-icons/bs";
 const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
+  const { cart } = useSelector((state) => state.cartInfo);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -111,6 +113,18 @@ const Header = () => {
                   </Link>
                 </>
               )}
+              <Link
+                to="/cart"
+                className="nav-link position-relative d-inline-flex align-items-center"
+                style={{ width: "fit-content" }}
+              >
+                <BsCart3 className="fs-4" />
+                {cart.length > 0 && (
+                  <span className="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
+                    {cart.length}
+                  </span>
+                )}
+              </Link>
             </Nav>
           </div>
         </Navbar.Collapse>

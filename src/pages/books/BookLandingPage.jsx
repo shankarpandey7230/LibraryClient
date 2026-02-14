@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import Star from "@components/star/Star";
 import Reviews from "@components/reviews/Reviews";
+import { setCart } from "@features/cart/cartSlice";
+import { toast } from "react-toastify";
 
 const BookLandingPage = () => {
   const { slug } = useParams();
@@ -25,10 +27,16 @@ const BookLandingPage = () => {
   // const [book, setBook] = useState([]);
 
   const { selectedBook } = useSelector((state) => state.bookInfo);
+  const { cart } = useSelector((state) => state.cartInfo);
   // const [book, setBook] = useState([]);
   // console.log(selectedBook);
 
   const dispatch = useDispatch();
+  const handleOnAddToCart = () => {
+    toast("Book Added Successfull to the cart");
+    dispatch(setCart(selectedBook));
+  };
+  const isBookInCart = cart.find((item) => item._id === selectedBook._id);
 
   useEffect(() => {
     // first approach, locally
@@ -123,7 +131,15 @@ const BookLandingPage = () => {
                 <div className="bottom">
                   <hr />
                   <div className="d-grid">
-                    <Button variant="dark">Add To The List</Button>
+                    <Button
+                      onClick={handleOnAddToCart}
+                      variant="dark"
+                      disabled={isBookInCart}
+                    >
+                      {isBookInCart
+                        ? "Book is Already In Cart"
+                        : "Add To The List"}
+                    </Button>
                   </div>
                 </div>
               </div>
