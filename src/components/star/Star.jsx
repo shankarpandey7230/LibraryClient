@@ -13,13 +13,13 @@ const Star = ({ avgRating, totalReviews }) => {
   //   console.log(halfStar, fullStar, emptyStars);
   const showStars = [];
   for (let i = 0; i < fullStar; i++) {
-    showStars.push(<RiStarSFill className="text-warning" key={i} />);
+    showStars.push(<RiStarSFill className="text-warning" key={`full-${i}`} />);
   }
   if (halfStar) {
-    showStars.push(<FaStarHalfAlt className="text-warning" />);
+    showStars.push(<FaStarHalfAlt className="text-warning" key="half" />);
   }
   for (let i = 0; i < emptyStars; i++) {
-    showStars.push(<FaRegStar />);
+    showStars.push(<FaRegStar key={`empty-${i}`} />);
   }
   return (
     <div>
