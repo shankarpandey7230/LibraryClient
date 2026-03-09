@@ -5,8 +5,10 @@ import { Outlet } from "react-router";
 import { Container, Row, Col } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import AuthRoute from "../auth/AuthRoute";
+import { useSelector } from "react-redux";
 
 const UserLayout = () => {
+  const { user } = useSelector((state) => state.userInfo);
   return (
     <AuthRoute>
       {/* navbar */}
@@ -17,7 +19,9 @@ const UserLayout = () => {
         <div className="bg-secondary text-white p-3" style={{ width: "200px" }}>
           <div className="p-3">
             <div className="">Welcome Back</div>
-            <h4>Shankar</h4>
+            <h4>
+              {user.fName}({user.role})
+            </h4>
           </div>
           <hr />
           <Sidebar />

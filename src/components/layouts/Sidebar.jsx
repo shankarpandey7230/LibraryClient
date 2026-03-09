@@ -35,8 +35,14 @@ function Sidebar() {
       </div>
       <div className="p-2">
         <Link className="nav-link" to="/user/borrow-history">
+          <FaHandsHelping className="m-1" />
+          All BorrowHistory
+        </Link>
+      </div>
+      <div className="p-2">
+        <Link className="nav-link" to="/user/my-borrow-history">
           <FaHandsHelping className="m-2" />
-          Borrow History
+          My BurrowList
         </Link>
       </div>
       <div className="p-2">
