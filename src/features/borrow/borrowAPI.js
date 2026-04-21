@@ -7,9 +7,10 @@ const borrowApiEP = apiBaseUrl + "/api/v1/burrows";
 // fetch borrowed Books for Admin
 
 // for admin only
-export const fetchAllBorrowsApi = async () => {
+export const fetchAllBorrowsApi = async (isAdmin) => {
+  const path = isAdmin ? "/admin" : "/user";
   const obj = {
-    url: borrowApiEP + "/admin",
+    url: borrowApiEP + path,
     method: "get",
     isPrivateCall: true,
   };

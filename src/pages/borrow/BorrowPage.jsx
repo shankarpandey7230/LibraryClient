@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import BurrowTable from "@components/tables/BurrowTable";
 
-const BorrowPage = () => {
+const BorrowPage = ({ isAdmin }) => {
   return (
     <div className="p-3">
-      <h3>All Burrowed Books</h3>
+      <h3>{isAdmin ? "All Burrowed Books" : "My Burrowed List"}</h3>
       <hr />
-      <BurrowTable />
+      <BurrowTable isAdmin={isAdmin} />
     </div>
   );
 };

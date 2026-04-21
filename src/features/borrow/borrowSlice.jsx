@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   allborrows: [], //admin to see the borrows
-  myBorrows: [], //customer to see
+  myborrows: [], //customer to see
 };
 const userSlice = createSlice({
   name: "borrow",
@@ -12,7 +12,7 @@ const userSlice = createSlice({
       state.allborrows = payload;
     },
     setMyBorrows: (state, { payload }) => {
-      state.myBorrows = payload;
+      state.myborrows = payload;
     },
   },
 });

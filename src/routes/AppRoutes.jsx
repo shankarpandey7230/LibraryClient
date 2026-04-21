@@ -23,8 +23,12 @@ import Search from "@pages/books/Search";
 import CartPage from "@pages/cart/CartPage";
 import ThankyouCartPage from "@pages/cart/ThankyouCartPage";
 import BurrowTable from "@components/tables/BurrowTable";
+import { useSelector } from "react-redux";
 
+const noAccess = <h1>No permission granted for this user</h1>;
 const AppRoutes = () => {
+  const { user } = useSelector((state) => state.userInfo);
+  const isAdmin = user.role === "admin";
   return (
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
@@ -43,14 +47,23 @@ const AppRoutes = () => {
       {/* private Pages */}
       <Route path="/user" element={<UserLayout />}>
         <Route index element={<Dashboard />} />
+        <Route
+          path="my-borrow-history"
+          element={<BorrowPage isAdmin={false} />}
+        />
+        <Route path="books" element={isAdmin ? <Books /> : noAccess} />
+        <Route path="new-book" element={isAdmin ? <NewBookPage /> : noAccess} />
+        <Route
+          path="edit-book/:_id"
+          element={isAdmin ? <EditBookPage /> : noAccess}
+        />
+        <Route path="reviews" element={isAdmin ? <ReviewPage /> : noAccess} />
+        <Route path="all" element={isAdmin ? <UserPage /> : noAccess} />
+        <Route
+          path="borrow-history"
+          element={isAdmin ? <BorrowPage isAdmin={true} /> : noAccess}
+        />
 
-        <Route path="books" element={<Books />} />
-        <Route path="new-book" element={<NewBookPage />} />
-        <Route path="edit-book/:_id" element={<EditBookPage />} />
-        <Route path="reviews" element={<ReviewPage />} />
-        <Route path="all" element={<UserPage />} />
-        <Route path="borrow-history" element={<BorrowPage />} />
-        <Route path="my-borrow-history" element={<BorrowPage />} />
         <Route path="profile" element={<Profile />} />
         <Route path="thank-you" element={<ThankyouCartPage />} />
       </Route>

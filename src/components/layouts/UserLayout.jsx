@@ -17,9 +17,9 @@ const UserLayout = () => {
 
       <div className="d-flex">
         <div className="bg-secondary text-white p-3" style={{ width: "200px" }}>
-          <div className="p-3">
+          <div className="p-2">
             <div className="">Welcome Back</div>
-            <h4>
+            <h4 className="">
               {user.fName}({user.role})
             </h4>
           </div>

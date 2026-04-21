@@ -1,12 +1,12 @@
 import { toast } from "react-toastify";
 import { fetchAllBorrowsApi } from "./borrowAPI";
-import { setAllBorrows } from "./borrowSlice";
+import { setAllBorrows, setMyBorrows } from "./borrowSlice";
 
-export const getAllBorrowsAction = () => async (dispatch) => {
+export const getAllBorrowsAction = (isAdmin) => async (dispatch) => {
   // const AllBurrows = await fetchAllBorrowsApi();
-  const pending = fetchAllBorrowsApi();
+  const pending = fetchAllBorrowsApi(isAdmin);
   // toast.promise({ pending: "Please wait" });
   const { status, payload, message } = await pending;
   console.log(status, payload, message);
-  dispatch(setAllBorrows(payload));
+  isAdmin ? dispatch(setAllBorrows(payload)) : dispatch(setMyBorrows(payload));
 };

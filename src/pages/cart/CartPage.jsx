@@ -25,15 +25,20 @@ const CartPage = () => {
     dispatch(removeBookFromCart(_id));
   };
   const handleProceedToBurrow = () => {
-    console.log("Clicked");
+    // console.log("Clicked");
     setShowModal(true);
   };
   const handleConfirmProceed = async () => {
     console.log("proceeded");
     setShowModal(false);
     // API to send user and the cart list for burrowing in database
-    const bookArr = cart.map(({ _id, title, imgUrl }) => {
-      return { bookId: _id, bookTitle: title, thumbnail: imgUrl };
+    const bookArr = cart.map(({ _id, title, imgUrl, slug }) => {
+      return {
+        bookId: _id,
+        bookTitle: title,
+        thumbnail: imgUrl,
+        bookSlug: slug,
+      };
     });
     console.log(bookArr);
     const pending = postBurrowApi(bookArr);
