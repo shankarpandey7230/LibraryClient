@@ -10,6 +10,7 @@ const initialState = {
   fName: "",
   lName: "",
   email: "",
+  phone: "", // ✅ add this
   password: "",
   confirmPassword: "",
 };

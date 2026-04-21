@@ -14,7 +14,8 @@ export const signUpNewUserApi = async (payload) => {
     showToast: true,
   };
   const result = await apiProcess(obj);
-  console.log(result);
+  // console.log(result);
+  return result;
 };
 
 export const activateNewUserApi = async (payload) => {

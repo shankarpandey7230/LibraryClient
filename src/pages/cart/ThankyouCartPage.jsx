@@ -23,7 +23,7 @@ const ThankyouCartPage = () => {
           </Alert>
 
           <div className="text-center">
-            <Link to="/user/borrow-history">
+            <Link to="/user/my-borrow-history">
               Go to your account to view your burrow history
             </Link>
           </div>
