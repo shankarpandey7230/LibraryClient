@@ -45,7 +45,15 @@ const BookTable = () => {
         <tbody>
           {displayBook.map(
             (
-              { _id, status, title, imgUrl, expectedAvailable, available },
+              {
+                _id,
+                status,
+                title,
+                imgUrl,
+                expectedAvailable,
+                available,
+                slug,
+              },
               i
             ) => (
               <tr key={_id}>
@@ -84,7 +92,7 @@ const BookTable = () => {
                     wordWrap: "break-word",
                   }}
                 >
-                  {title}
+                  <a href={`/books/${slug}`}>{title}</a>
                 </td>
                 <td
                   className={
