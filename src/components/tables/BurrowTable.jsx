@@ -1,4 +1,7 @@
-import { getAllBorrowsAction } from "@features/borrow/borrowAction";
+import {
+  getAllBorrowsAction,
+  returnBorrowsAction,
+} from "@features/borrow/borrowAction";
 import React, { useEffect } from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +31,12 @@ const BurrowTable = ({ isAdmin }) => {
   // });
 
   const handleOnSearch = () => {};
+
+  const handleOnBookReturn = (_id) => {
+    if (confirm("Are you sure to return this book")) {
+      dispatch(returnBorrowsAction({ _id, isAdmin }));
+    }
+  };
   return (
     <div>
       <div className="d-flex justify-content-between mb-5">
@@ -117,7 +126,12 @@ imgUrl.replace(/^public[\\/]/, "")
                 {!pathname.includes("user/borrow-history") && (
                   <td>
                     {!isReturned && (
-                      <Button variant="warning">Return Book</Button>
+                      <Button
+                        variant="warning"
+                        onClick={() => handleOnBookReturn(_id)}
+                      >
+                        Return Book
+                      </Button>
                     )}
                     {isReturned && !reviewId && (
                       <Button variant="success">Leave Review </Button>
